@@ -11,4 +11,21 @@
 
 // TODO: aggiungere qui le intestazioni da precompilare
 
+#include <iostream>
+#include <Windows.h>
+#include <conio.h>
+#include <array>
+#include <vector>
+#include <string>
+#include "constants.h"
+
+#include "InputManager.h"
+#include "Display.h"
+
+#include "Connection.h"
+#include "Node.h"
+#include "NodeRecord.h"
+#include "PathFinderAStar.h"
+#include "EightQueensLoop.h"
+
 #endif //PCH_H

@@ -4,9 +4,15 @@
 #include "pch.h"
 #include <iostream>
 
+
+using namespace std;
+
+
+
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	EightQueensLoop* myLoop = EightQueensLoop::GetInstance();
+	myLoop->Start();
 }
 
 // Per eseguire il programma: CTRL+F5 oppure Debug > Avvia senza eseguire debug
