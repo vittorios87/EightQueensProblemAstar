@@ -41,11 +41,8 @@ void EightQueensLoop::Update() {
 	{
 		if (myPathFinderEightQs->GetOpenNodeRecordsLength() > 0) {
 			myPathFinderEightQs->PathFinderStep();
-			myDisplay->cls();
-			myDisplay->printBuffer(myPathFinderEightQs->PrintDisplay());
+			displayToRefresh = true;
 		}
-		//displayBuffer.clear();
-		//displayBuffer.append(L"ciao");
 	}
 	*/
 	if (myPathFinderEightQs->GetOpenNodeRecordsLength() > 0) {

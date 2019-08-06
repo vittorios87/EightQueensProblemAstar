@@ -1,0 +1,67 @@
+COMINCIAMO CON IL DEFINIRE LE CLASSI PRINCIPALI
+
+NODE - TABLE STATE
+Possiamo confondere la classe Node con la classe 'QueenPosition'
+La classe QueenPosition contiene semplicemente due interi.
+Questi due interi possono acquisire solo valori da 0 a 7  (scacchiera 8 x 8)
+Non proprio esatto...
+Il node è dato da un array di 8 oggetti di tipo QueenPosition
+
+CONNECTION COST
+Definisco la classe Connection:
+la classe connection è la connessione tra due nodi. Deve avere due membri:
+nodo di partenza: fromNode
+
+nodo di arrivo o destinazione: toNode
+
+e in più un intero che è dato dal costo della connessione:
+connectionCost = caselle non occupabili dello stato finale - non occupabili dello stato iniziale
+
+Il costo della connessione però dipende da TUTTE le regine disposte prima di posizionare quella nella posizione data dal "toNode" (nodo di arrivo)
+Nel determinare il COSTO DELLA CONNESSIONE non conta l'ordine con cui sono state posizionate le regine precedenti.
+
+----------
+Quindi la classe Node deve avere l'informazione di tutte le regine posizionate al momento.
+Dato che il problema consiste nel posizionare le 8 regine in modo corretto, la classe node contiene un array di 8 QueenPosition
+
+Per le regine non ancora posizionate i valori interi assumono entrambi il valore 8.
+In questo modo i nodi sono anche confrontabili tra loro. Si arriva a uno stesso nodo quando le posizioni sono le stesse, a prescindere dal loro ordine.
+
+POSSIBILI AGGIUNTE ALLA CLASSE NODE
+- metodo che confronta due nodi
+- metodo che ordina le regine piazzate in ordine di indice di riga crescente e, per ciascun indice riga in ordine di indice colonna crescente
+  ( questo metodo serve per confrontare i nodi: prima ordino, poi confronto)
+- metodo GenerateConnections(): non esiste un grafo e quindi dobbiamo ricavare le connessioni al momento, on the road
+
+   METODO PER GENERARE LE CONNESSIONI
+   Serve un metodo efficiente per generare le connessioni.
+
+NODE RECORDS E PATH FINDING LISTS
+
+- node records -
+
+Le path finding lists sono liste di NodeRecords
+
+Una pathfinding list deve avere un metodo Contains() che ritorna un booleano se nella path finding List esiste un node record che parte da quel nodo.
+
+CLASSE CONNECTION
+La classe Connection ha i membri
+- connection cost
+- Nodo origine
+- QueenPosition posizione della prossima regina
+Viene usata nel NodeRecord.
+
+ USO DELLA CLASSE CONNECTION
+ Poichè ogni nodo contiene le posizioni di tutte le regine, non è necessario inserire nei NodeRecord la Connection (unica) che permette di tracciarne il nodo da cui si è arrivati (e in
+ tal caso questa andrebbe cambiata). Gli oggetti Node sono unici e contengono già una 'istantanea' della scacchiera con il 'costSoFar' che dipende in modo univoco dalla posizione delle regine.
+
+ Questa classe viene usata per memorizzare le possibili traiettorie che si possono prendere da un nodo. Perciò da un nodo si potrà andare verso tutti i nodi in cui è possibile piazzare
+ una regina in più. Dallo stesso si potrà tornare indietro verso i nodi che contengono tutte le regine del nodo corrente meno una. 
+ Il numero di nodi da cui si può arrivare verso un nodo è quindi uguale al numero di regine del nodo stesso.
+ Il numero di nodi verso cui si può andare (in avanti) è uguale al numero di celle occupabili.
+DUE OSSERVAZIONI:
+1. quando controlli le due pathfinding list (quella dei nodi aperti e quella dei nodi chiusi), non serve controllare che il "costSoFar" sia maggiore o uguale
+del costo del nodo (chiuso o aperto) per poter dare il comando "continue". Questo perchè abbiamo la certezza che se i nodi sono uguali il loro costo totale (cost so far)
+sarà sempre lo stesso, indipendentemente dall'ordine con cui le celle sono state riempite. Si usa sempre "continue".
+2. cercare il node record aperto con il valore di "estimated total cost" più basso vuol dire cercare un compromesso tra la vicinanza al goal (più regine già piazzate corrisponde
+a una stima del costo residuo corrispondente alle regine non ancora usate) e il cost so far (numero delle celle non più occupabili)

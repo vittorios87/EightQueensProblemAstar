@@ -111,7 +111,6 @@ int Node::CountNotAllowedPositsOfTable(int* tablePtr) {
 void Node::GenerateConnections() {
 	// (0,0) coordinates on the top left corner
 	int allowedCellsTable[CHESSTABLEDIM][CHESSTABLEDIM]  = { 0 };
-	//{ { 0,0,0,0,0,0,0,0},{ 0,0,0,0,0,0,0,0},{ 0,0,0,0,0,0,0,0},{ 0,0,0,0,0,0,0,0},{ 0,0,0,0,0,0,0,0},{ 0,0,0,0,0,0,0,0},{ 0,0,0,0,0,0,0,0},{ 0,0,0,0,0,0,0,0} };
 	
 
 	for (int i = 0; i < CHESSTABLEDIM; i++) {

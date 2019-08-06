@@ -60,7 +60,6 @@ void Display::printBuffer(std::wstring& inputBuffer) {
 
 void Display::cls()
 {
-	COORD coordScreen = { 0, 0 };    // home for the cursor 
 	DWORD cCharsWritten;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	DWORD dwConSize;
@@ -72,16 +71,16 @@ void Display::cls()
 	FillConsoleOutputCharacter(hOut,        // Handle to console screen buffer 
 		(TCHAR) ' ',     // Character to write to the buffer
 		dwConSize,       // Number of cells to write 
-		coordScreen,     // Coordinates of first cell 
+		coord,     // Coordinates of first cell 
 		&cCharsWritten);// Receive number of characters written
 
 	GetConsoleScreenBufferInfo(hOut, &csbi);
 	FillConsoleOutputAttribute(hOut,         // Handle to console screen buffer 
 		csbi.wAttributes, // Character attributes to use
 		dwConSize,        // Number of cells to set attribute 
-		coordScreen,      // Coordinates of first cell 
+		coord,      // Coordinates of first cell 
 		&cCharsWritten); // Receive number of characters written
 	// Put the cursor at its home coordinates.
 
-	SetConsoleCursorPosition(hOut, coordScreen);
+	SetConsoleCursorPosition(hOut, coord);
 }

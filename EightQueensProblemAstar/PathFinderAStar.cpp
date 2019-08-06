@@ -34,7 +34,7 @@ bool PathFinderAStar::NRListContainsNode(std::vector<NodeRecord*>* nodeRecordsLi
 
 void PathFinderAStar::PathFinderStep() {
 	//scegli il node record con il valore di estimated total cost più basso
-	solutionHasBeenFound = false;
+	//solutionHasBeenFound = false;
 
 	int currentNRindex = 0;
 	currentNodeRecord = SelectNRWithLowestEstimatedCost(currentNRindex);
@@ -42,10 +42,8 @@ void PathFinderAStar::PathFinderStep() {
 
 	if (currentNodeRecord->GetOwnedNodePtr()->GetPlacedQueens() == CHESSTABLEDIM) {
 		solutions.push_back(*currentNodeRecord->GetOwnedNodePtr());
-		closedNodeRecords->push_back((*(openNodeRecords->begin() + currentNRindex)));
-		openNodeRecords->erase(openNodeRecords->begin() + currentNRindex);
-		solutionHasBeenFound = true;
-		return;
+		
+		//solutionHasBeenFound = true;
 	}
 	else {
 		currentNodeRecord->GenerateNodeRecords();
@@ -60,10 +58,10 @@ void PathFinderAStar::PathFinderStep() {
 				openNodeRecords->push_back((*it));
 			}
 		}
-		closedNodeRecords->push_back((*(openNodeRecords->begin() + currentNRindex)));
-		openNodeRecords->erase(openNodeRecords->begin() + currentNRindex);
-		return;
 	}
+	closedNodeRecords->push_back((*(openNodeRecords->begin() + currentNRindex)));
+	openNodeRecords->erase(openNodeRecords->begin() + currentNRindex);
+	return;
 
 }
 

@@ -28,7 +28,7 @@ private:
 
 	std::wstring buffer;
 
-	bool solutionHasBeenFound = false;
+	//bool solutionHasBeenFound = false;
 
 	int solutionToViewIndex = 0;
 
